@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 
 import java.util.UUID;
 
-@Inheritance
-@Table(name = "tb_usuarios")
-@Entity
+@MappedSuperclass
 public abstract class Usuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     protected UUID id;
     @Column

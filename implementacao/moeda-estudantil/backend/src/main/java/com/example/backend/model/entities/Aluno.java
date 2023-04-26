@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.lang.annotation.Inherited;
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,6 +31,7 @@ public class Aluno extends  Usuario{
 
     @Column(name = "saldo")
     private Integer saldo;
+
 
     @Override
     public void login() {
