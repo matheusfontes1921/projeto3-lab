@@ -20,15 +20,16 @@
   font-size: 20px;
 }
 
-.form button{
+.buttons button{
   background-color: rgb(144, 144, 224);
   color: white;
   border-radius: 10%;
   padding: 10px;
+  margin-right: 10px;
   border-color: rgb(144, 144, 224);
 }
 
-.form button:hover{
+.buttons button:hover{
   cursor: pointer;
   
 }

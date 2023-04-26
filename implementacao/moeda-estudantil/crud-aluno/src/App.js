@@ -16,7 +16,11 @@ function App() {
     <input type="text" name="endereco" />
     <label>Saldo</label>
     <input type="text" name="saldo" />
-    <button>Submit</button>
+    <div className="buttons">
+    <button>Create</button>
+    <button>Update</button>
+    <button>Delete</button>
+    </div>
     </div>
     </div>
   );

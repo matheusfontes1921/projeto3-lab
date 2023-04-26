@@ -11,7 +11,11 @@ function App() {
         <input type="text" name="id_empresa" />
         <label>ID da vantagem</label>
         <input type="text" name="id_vantagem" />
-        <button>Submit</button>
+        <div className="buttons">
+        <button>Create</button>
+        <button>Update</button>
+        <button>Delete</button>
+        </div>
       </div>
     </div>
   );
