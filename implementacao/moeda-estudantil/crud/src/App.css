@@ -1,3 +1,10 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
 .App {
   text-align: center;
 }
@@ -20,15 +27,16 @@
   font-size: 20px;
 }
 
-.form button{
+.buttons button{
   background-color: rgb(144, 144, 224);
   color: white;
   border-radius: 10%;
   padding: 10px;
+  margin-right: 10px;
   border-color: rgb(144, 144, 224);
 }
 
-.form button:hover{
+.buttons button:hover{
   cursor: pointer;
-  
+
 }
