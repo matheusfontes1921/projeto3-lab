@@ -26,7 +26,7 @@ public class EmpresaService {
     }
 
     public Optional<Empresa> buscarEmpresaPorId(UUID id) {
-        return alunoRepository.findById(String.valueOf(id));
+        return alunoRepository.findById(id);
     }
 
     public void atualizarEmpresa(Empresa aluno) {
@@ -34,6 +34,6 @@ public class EmpresaService {
     }
 
     public void removerEmpresa(UUID id) {
-        alunoRepository.deleteById(String.valueOf(id));
+        alunoRepository.deleteById(id);
     }
 }

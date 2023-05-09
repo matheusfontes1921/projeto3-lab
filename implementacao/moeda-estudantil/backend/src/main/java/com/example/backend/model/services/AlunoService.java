@@ -26,14 +26,25 @@ public class AlunoService {
     }
 
     public Optional<Aluno> buscarAlunoPorId(UUID id) {
-        return alunoRepository.findById(String.valueOf(id));
+        return alunoRepository.findById(id);
     }
 
-    public void atualizarAluno(Aluno aluno) {
+    public void atualizarAluno(Aluno alunoAtualizado) {
+        Aluno aluno = alunoRepository.findById(alunoAtualizado.getId())
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        aluno.setNome(alunoAtualizado.getNome());
+        aluno.setEmail(alunoAtualizado.getEmail());
+        aluno.setSenha(alunoAtualizado.getSenha());
+        aluno.setSaldo(alunoAtualizado.getSaldo());
+        aluno.setCpf(alunoAtualizado.getCpf());
+        aluno.setRg(alunoAtualizado.getRg());
+        aluno.setEndereco(alunoAtualizado.getEndereco());
+        aluno.setInstituicao(alunoAtualizado.getInstituicao());
+        aluno.setCurso(alunoAtualizado.getCurso());
         alunoRepository.save(aluno);
     }
 
     public void removerAluno(UUID id) {
-        alunoRepository.deleteById(String.valueOf(id));
+        alunoRepository.deleteById(id);
     }
 }

@@ -1,26 +1,14 @@
 package com.example.backend.model.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "professor")
 @Entity
 public class Professor extends Usuario {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "nome")
-    private String nome;
 
     @Column(name = "cpf")
     private String cpf;
@@ -32,11 +20,19 @@ public class Professor extends Usuario {
     @JoinColumn(name = "instituicao_id")
     private Instituicao instituicao;
 
-    @Column(name = "saldo")
-    private Integer saldo;
-
     @Override
     public void login() {
 
+    }
+
+    public Professor( String nome, String email, String senha, Integer saldo, String cpf, String departamento, Instituicao instituicao) {
+        super(nome, email, senha, saldo);
+        this.cpf = cpf;
+        this.departamento = departamento;
+        this.instituicao = instituicao;
+    }
+
+    public Professor() {
+        super();
     }
 }

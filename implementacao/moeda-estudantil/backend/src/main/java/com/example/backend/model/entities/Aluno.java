@@ -1,7 +1,6 @@
 package com.example.backend.model.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Aluno extends  Usuario{
+public class Aluno extends Usuario {
 
     @Column(name = "cpf")
     private String cpf;
@@ -29,9 +27,14 @@ public class Aluno extends  Usuario{
     @Column(name = "curso")
     private String curso;
 
-    @Column(name = "saldo")
-    private Integer saldo;
-
+    public Aluno(String nome, String email, String senha, Integer saldo, String cpf, String rg, String endereco, Instituicao instituicao, String curso) {
+        super(nome, email, senha, saldo);
+        this.cpf = cpf;
+        this.rg = rg;
+        this.endereco = endereco;
+        this.instituicao = instituicao;
+        this.curso = curso;
+    }
 
     @Override
     public void login() {

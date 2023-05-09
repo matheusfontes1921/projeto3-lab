@@ -1,5 +1,8 @@
 package com.example.backend.model.entities;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,13 +20,13 @@ public class Instituicao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private UUID id;
 
     @Column(name = "nome_do_curso")
     private String nomeDoCurso;
 
     @OneToMany(mappedBy = "instituicao", cascade = CascadeType.ALL)
-    private List<Professor> professores;
+    private final List<Professor> professores = new ArrayList<>();
 
     // getters e setters
 }
