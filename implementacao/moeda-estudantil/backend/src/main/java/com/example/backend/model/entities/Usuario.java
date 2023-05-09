@@ -31,8 +31,7 @@ public abstract class Usuario {
         this.saldo = saldo;
     }
 
-    public Usuario() {
-    }
+    public Usuario() {}
 
     public abstract void login();
 
