@@ -25,7 +25,7 @@ public class EmpresaService {
         return alunoRepository.findAll();
     }
 
-    public Optional<Empresa> buscarEmpresaPorId(UUID id) {
+    public Optional<Empresa> buscarEmpresaPorId(Long id) {
         return alunoRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class EmpresaService {
         alunoRepository.save(aluno);
     }
 
-    public void removerEmpresa(UUID id) {
+    public void removerEmpresa(Long id) {
         alunoRepository.deleteById(id);
     }
 }

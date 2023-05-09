@@ -19,7 +19,7 @@ public class TransferenciaService {
         this.alunoRepository = alunoRepository;
     }
 
-    public void transferirSaldo(UUID idProfessor, UUID idAluno, Integer valorTransferencia) {
+    public void transferirSaldo(Long idProfessor, Long idAluno, Integer valorTransferencia) {
         Professor professor = professorRepository.findById(idProfessor).orElseThrow(() -> new RuntimeException("Professor não encontrado"));
         Aluno aluno = alunoRepository.findById(idAluno).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
 

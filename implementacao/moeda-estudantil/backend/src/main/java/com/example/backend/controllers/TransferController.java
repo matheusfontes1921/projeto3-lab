@@ -21,8 +21,8 @@ public class TransferController {
 
     @PostMapping("/{idProfessor}/{idAluno}/{valor}")
     public ResponseEntity<String> transferirSaldo(
-            @PathVariable UUID idProfessor,
-            @PathVariable UUID idAluno,
+            @PathVariable Long idProfessor,
+            @PathVariable Long idAluno,
             @PathVariable Integer valor) {
         try {
             meuService.transferirSaldo(idProfessor, idAluno, valor);

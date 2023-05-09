@@ -13,7 +13,7 @@ public abstract class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    protected UUID id;
+    protected Long id;
     @Column
     protected String nome;
     @Column

@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name="aluno")
 public class Aluno extends Usuario {
 
     @Column(name = "cpf")

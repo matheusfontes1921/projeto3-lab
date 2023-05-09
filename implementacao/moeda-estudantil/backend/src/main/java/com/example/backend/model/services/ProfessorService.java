@@ -14,11 +14,11 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
-    public Optional<Professor> findById(UUID id) {
+    public Optional<Professor> findById(Long id) {
         return professorRepository.findById(id);
     }
 
-    public void delete(UUID id) {
+    public void delete(Long id) {
         professorRepository.deleteById(id);
     }
 

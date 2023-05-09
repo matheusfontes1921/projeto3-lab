@@ -25,7 +25,7 @@ public class AlunoService {
         return alunoRepository.findAll();
     }
 
-    public Optional<Aluno> buscarAlunoPorId(UUID id) {
+    public Optional<Aluno> buscarAlunoPorId(Long id) {
         return alunoRepository.findById(id);
     }
 
@@ -44,7 +44,7 @@ public class AlunoService {
         alunoRepository.save(aluno);
     }
 
-    public void removerAluno(UUID id) {
+    public void removerAluno(Long id) {
         alunoRepository.deleteById(id);
     }
 }

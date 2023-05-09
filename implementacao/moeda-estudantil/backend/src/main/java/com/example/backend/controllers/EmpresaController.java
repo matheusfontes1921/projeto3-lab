@@ -26,7 +26,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Empresa> buscarEmpresaPorId(@PathVariable UUID id) {
+    public ResponseEntity<Empresa> buscarEmpresaPorId(@PathVariable Long id) {
         Optional<Empresa> empresa = empresaService.buscarEmpresaPorId(id);
         return empresa.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
@@ -38,7 +38,7 @@ public class EmpresaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Empresa> atualizarEmpresa(@PathVariable UUID id, @RequestBody Empresa empresaAtualizada) {
+    public ResponseEntity<Empresa> atualizarEmpresa(@PathVariable Long id, @RequestBody Empresa empresaAtualizada) {
         Optional<Empresa> empresa = empresaService.buscarEmpresaPorId(id);
         if (empresa.isPresent()) {
             empresaService.atualizarEmpresa(empresaAtualizada);
@@ -49,7 +49,7 @@ public class EmpresaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removerEmpresa(@PathVariable UUID id) {
+    public ResponseEntity<Void> removerEmpresa(@PathVariable Long id) {
         Optional<Empresa> empresa = empresaService.buscarEmpresaPorId(id);
         if (empresa.isPresent()) {
             empresaService.removerEmpresa(id);

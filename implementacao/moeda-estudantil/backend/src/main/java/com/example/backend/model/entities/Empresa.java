@@ -17,8 +17,4 @@ public class Empresa extends Usuario {
 
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
 }
