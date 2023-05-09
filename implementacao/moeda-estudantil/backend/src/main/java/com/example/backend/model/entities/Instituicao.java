@@ -26,7 +26,7 @@ public class Instituicao {
     @Column(name = "nome_do_curso")
     private String nomeDoCurso;
 
-    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.ALL)
     private final List<Professor> professores = new ArrayList<>();
 
     // getters e setters
