@@ -3,8 +3,7 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 
 export default function AlunoCrud() {
-    const { id } = useParams();
-
+    const [id, setId] = useState("");
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [rg, setRg] = useState("");
@@ -19,8 +18,6 @@ export default function AlunoCrud() {
         const alunos = axios.get("http://localhost:8080/alunos").then(res => {
             setListAlunos(res.data)
         })
-
-        console.log(alunos)
     })
 
     const create = () => {
@@ -38,7 +35,7 @@ export default function AlunoCrud() {
 
         console.log(data)
 
-        axios.post("http://localhost:8080/alunos", data, {headers: { "Content-Type": "application/json" }})
+        axios.post("http://localhost:8080/alunos", JSON.stringify(data), {headers: { "Content-Type": "application/json" }})
             .then(res => console.log(res.status))
             .catch(res => console.log(res))
     }
@@ -47,9 +44,6 @@ export default function AlunoCrud() {
         event.preventDefault();
 
         const data = {
-            nome: nome,
-            email: email,
-            senha: senha,
             saldo: saldo,
             cpf: cpf,
             rg: rg,
@@ -57,14 +51,15 @@ export default function AlunoCrud() {
             curso: curso
         }
 
-        axios.put(`http://localhost:8080/alunos/${id}`, JSON.stringify(data), {headers: { "Content-Type": "application/json" }})
-            .then(res => console.log(res.status))
+        axios.put(`http://localhost:8080/alunos/atualizar/${id}`, JSON.stringify(data), {headers: { "Content-Type": "application/json" }})
+            .then(res => console.log(res))
             .catch(res => console.log(res))
     }
 
     const deleteAccount = () => {
-        axios.delete(`http://localhost:8080/alunos/{id}`, {headers: { "Content-Type": "application/json" }})
-            .then(res => console.log(res.status))
+        event.preventDefault();
+        axios.delete(`http://localhost:8080/alunos/remover/${id}`)
+            .then(res => console.log(res))
     }
 
 
@@ -138,18 +133,11 @@ export default function AlunoCrud() {
 
             <h2>Update</h2>
             <form className="form">
-                <label>Nome</label>
+                <label>Id</label>
                 <input
                     type="text"
-                    name="nome"
-                    onChange={(e) => setNome(e.target.value)}
-                    required
-                />
-                <label>Email</label>
-                <input
-                    type="text"
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    name="id"
+                    onChange={(e) => setId(e.target.value)}
                     required
                 />
                 <label>RG</label>
@@ -187,13 +175,6 @@ export default function AlunoCrud() {
                     onChange={(e) => setSaldo(e.target.value)}
                     required
                 />
-                <label>Senha</label>
-                <input
-                    type="password"
-                    name="senha"
-                    onChange={(e) => setSenha(e.target.value)}
-                    required
-                />
                 <div className="buttons">
                     <button onClick={update}>Update</button>
                 </div>
@@ -201,7 +182,7 @@ export default function AlunoCrud() {
 
             <h2>Delete</h2>
             <form className="form">
-                <input type="text" name="nome" onChange={(e) => setId(e.target)} required />
+                <input type="text" name="id" onChange={(e) => setId(e.target.value)} required />
                 <div className="buttons">
                     <button onClick={deleteAccount}>Delete</button>
                 </div>

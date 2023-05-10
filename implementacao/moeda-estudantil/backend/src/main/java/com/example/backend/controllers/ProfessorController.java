@@ -24,7 +24,7 @@ public class ProfessorController {
     }
 
 
-    @GetMapping("saldo/{id}")
+    @GetMapping("/saldo/{id}")
     public ResponseEntity<Integer> consultaSaldo(@PathVariable Long id) {
         Optional<Professor> professor = professorService.findById(id);
         return professor.map(value -> ResponseEntity.ok(value.getSaldo())).orElseGet(() -> ResponseEntity.notFound().build());
@@ -40,7 +40,7 @@ public class ProfessorController {
         }
     }
 
-    @GetMapping("busca/{id}")
+    @GetMapping("/busca/{id}")
     public ResponseEntity<Professor> buscarProfessorPorId(@PathVariable Long id) {
         Optional<Professor> professor = professorService.findById(id);
         return professor.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
@@ -52,7 +52,7 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(professorCriado);
     }
 
-    @PutMapping("atualizar/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Professor> atualizarProfessor(@PathVariable Long id, @RequestBody Professor professorAtualizado) {
         Optional<Professor> professorExistente = professorService.findById(id);
 
@@ -64,7 +64,7 @@ public class ProfessorController {
             return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("remover/{id}")
+    @DeleteMapping("/remover/{id}")
     public ResponseEntity<Void> removerProfessor(@PathVariable Long id) {
         Optional<Professor> professor = professorService.findById(id);
 
@@ -76,7 +76,7 @@ public class ProfessorController {
         }
     }
 
-    @GetMapping("transferencias/{id}")
+    @GetMapping("/transferencias/{id}")
     public ResponseEntity<List<Transfer>> listarTransferencias(@PathVariable Long id) {
         Professor aluno = professorService.findById(id)
                 .orElseThrow(() -> new RuntimeException("Professor não encontrado"));

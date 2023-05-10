@@ -1,8 +1,10 @@
 package com.example.backend.controllers;
 
 import com.example.backend.model.entities.Aluno;
+import com.example.backend.model.entities.Instituicao;
 import com.example.backend.model.entities.Transfer;
 import com.example.backend.model.services.AlunoService;
+import com.example.backend.model.services.InstituicaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +18,11 @@ import java.util.Optional;
 public class AlunoController {
 
     private final AlunoService alunoService;
+    private final InstituicaoService instituicaoService;
 
-    public AlunoController(AlunoService alunoService) {
+    public AlunoController(AlunoService alunoService, InstituicaoService instituicaoService) {
         this.alunoService = alunoService;
+        this.instituicaoService = instituicaoService;
     }
 
     @GetMapping
@@ -39,11 +43,13 @@ public class AlunoController {
 
     @PostMapping
     public ResponseEntity<Aluno> criarAluno(@RequestBody Aluno aluno) {
+        Instituicao i = instituicaoService.findInstituicao(1L);
+        aluno.setInstituicao(i);
         Aluno alunoCriado = alunoService.salvarAluno(aluno);
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoCriado);
     }
 
-    @PutMapping("atualizar/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Aluno> atualizarAluno(@PathVariable Long id, @RequestBody Aluno alunoAtualizado) {
         Optional<Aluno> alunoExistente = alunoService.findById(id);
 
@@ -52,7 +58,6 @@ public class AlunoController {
             aluno.setCpf(alunoAtualizado.getCpf());
             aluno.setRg(alunoAtualizado.getRg());
             aluno.setEndereco(alunoAtualizado.getEndereco());
-            aluno.setInstituicao(alunoAtualizado.getInstituicao());
             aluno.setCurso(alunoAtualizado.getCurso());
             aluno.setSaldo(alunoAtualizado.getSaldo());
 
@@ -63,7 +68,7 @@ public class AlunoController {
         }
     }
 
-    @DeleteMapping("remover/{id}")
+    @DeleteMapping("/remover/{id}")
     public ResponseEntity<Void> removerAluno(@PathVariable Long id) {
         Optional<Aluno> aluno = alunoService.findById(id);
 
@@ -75,13 +80,13 @@ public class AlunoController {
         }
     }
 
-    @GetMapping("saldo/{id}")
+    @GetMapping("/saldo/{id}")
     public ResponseEntity<Integer> consultaSaldo(@PathVariable Long id) {
         Optional<Aluno> aluno = alunoService.findById(id);
         return aluno.map(value -> ResponseEntity.ok(value.getSaldo())).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("transferencias/{id}")
+    @GetMapping("/transferencias/{id}")
     public ResponseEntity<List<Transfer>> listarTransferencias(@PathVariable Long id) {
         Aluno aluno = alunoService.findById(id)
                 .orElseThrow(() -> new RuntimeException("Professor não encontrado"));

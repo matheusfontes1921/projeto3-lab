@@ -40,8 +40,8 @@ function Login() {
                     if (response.status === 200) {
                         if(response.data.hasOwnProperty('curso')) {
                             console.log(response)
-                            console.log(`aluno/${response.data.id}`)
-                            navigate(`aluno/${response.data.id}`)
+                            console.log(`aluno/transferencias/${response.data.id}`)
+                            navigate(`aluno/transferencias/${response.data.id}`)
                         }else if(response.data.hasOwnProperty('departamento')) {
                             navigate(`professor/${response.data.id}`)
                             console.log(`professor/${response.data.id}`)

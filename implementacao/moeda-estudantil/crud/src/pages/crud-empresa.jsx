@@ -3,8 +3,7 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 
 export default function CrudEmpresa() {
-    const { id } = useParams()
-
+    const [id, setId] = useState("");
     const [nome, setNome] = useState("");
     const [idEmpresa, setIdEmpresa] = useState("");
     const [idVantagem, setIdVantagem] = useState("");
@@ -54,9 +53,9 @@ export default function CrudEmpresa() {
             <h2>Create</h2>
             <form className="form">
                 <label>Nome da empresa</label>
-                <input type="text" name="nome" onChange={(e) => setNome(e.target)} required />
+                <input type="text" name="nome" onChange={(e) => setNome(e.target.value)} required />
                 <label>ID da empresa</label>
-                <input type="text" name="rg" onChange={(e) => setIdEmpresa(e.target)} required />
+                <input type="text" name="rg" onChange={(e) => setIdEmpresa(e.target.value)} required />
                 <label>ID da vantagem</label>
                 <input type="text" name="curso" onChange={(e) => setIdVantagem(e.target)} required />
                 <div className="buttons">
@@ -67,13 +66,13 @@ export default function CrudEmpresa() {
             <h2>Update</h2>
             <form className="form">
                 <label>Id</label>
-                <input type="text" name="nome" onChange={(e) => setId(e.target)} required />
+                <input type="text" name="nome" onChange={(e) => setId(e.target.value)} required />
                 <label>Nome da empresa</label>
-                <input type="text" name="nome" onChange={(e) => setNome(e.target)} required />
+                <input type="text" name="nome" onChange={(e) => setNome(e.target.value)} required />
                 <label>ID da empresa</label>
-                <input type="text" name="rg" onChange={(e) => setIdEmpresa(e.target)} required />
+                <input type="text" name="rg" onChange={(e) => setIdEmpresa(e.target.value)} required />
                 <label>ID da vantagem</label>
-                <input type="text" name="curso" onChange={(e) => setIdVantagem(e.target)} required />
+                <input type="text" name="curso" onChange={(e) => setIdVantagem(e.target.value)} required />
                 <div className="buttons">
                     <button onClick={create}>Create</button>
                 </div>
