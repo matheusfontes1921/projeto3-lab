@@ -1,11 +1,13 @@
 import {useState} from "react";
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 export default function CrudEmpresa() {
+    const { id } = useParams()
+
     const [nome, setNome] = useState("");
     const [idEmpresa, setIdEmpresa] = useState("");
     const [idVantagem, setIdVantagem] = useState("");
-    const [id, setId] = useState("")
     const [listEmpresas, setListEmpresas] = useState([]);
 
     useState(() => {
