@@ -1,7 +1,9 @@
 package com.example.backend.controllers;
 
+import com.example.backend.model.entities.Aluno;
 import com.example.backend.model.entities.Professor;
 import com.example.backend.model.entities.Professor;
+import com.example.backend.model.entities.Transfer;
 import com.example.backend.model.services.ProfessorService;
 import com.example.backend.model.services.ProfessorService;
 import org.springframework.http.HttpStatus;
@@ -72,5 +74,12 @@ public class ProfessorController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("transferencias/{id}")
+    public ResponseEntity<List<Transfer>> listarTransferencias(@PathVariable Long id) {
+        Professor aluno = professorService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Professor não encontrado"));
+        return ResponseEntity.ok(aluno.getTransfers());
     }
 }

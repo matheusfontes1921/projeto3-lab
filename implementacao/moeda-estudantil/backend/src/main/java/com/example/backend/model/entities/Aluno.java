@@ -26,7 +26,7 @@ public class Aluno extends Usuario {
     private String endereco;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instituicao_id")
     private Instituicao instituicao;
 

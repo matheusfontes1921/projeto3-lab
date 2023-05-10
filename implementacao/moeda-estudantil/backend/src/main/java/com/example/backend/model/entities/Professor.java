@@ -3,6 +3,9 @@ package com.example.backend.model.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
 @Setter
 @Table(name = "professor")
 @Entity
-public class Professor extends Usuario {
+public class   Professor extends Usuario {
 
     @Column(name = "cpf")
     private String cpf;
@@ -43,4 +46,6 @@ public class Professor extends Usuario {
     public Professor() {
         super();
     }
+
+
 }
