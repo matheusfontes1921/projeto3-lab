@@ -40,4 +40,7 @@ public class ProfessorService {
         professor.setInstituicao(professorAtualizado.getInstituicao());
         professorRepository.save(professor);
     }
+    public Professor save(Professor professor){
+        return professorRepository.save(professor);
+    }
 }

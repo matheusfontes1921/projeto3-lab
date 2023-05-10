@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Instituicao {
     private String nomeDoCurso;
 
     @OneToMany(mappedBy = "instituicao")
+    @JsonIgnore
     private final List<Professor> professores = new ArrayList<>();
 
     // getters e setters

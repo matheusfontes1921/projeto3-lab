@@ -6,34 +6,33 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class EmpresaService {
 
-    private final EmpresaRepository alunoRepository;
+    private final EmpresaRepository empresaRepository;
 
     public EmpresaService(EmpresaRepository alunoRepository) {
-        this.alunoRepository = alunoRepository;
+        this.empresaRepository = alunoRepository;
     }
 
     public Empresa salvarEmpresa(Empresa aluno) {
-        return alunoRepository.save(aluno);
+        return empresaRepository.save(aluno);
     }
 
     public List<Empresa> listarEmpresas() {
-        return alunoRepository.findAll();
+        return empresaRepository.findAll();
     }
 
     public Optional<Empresa> buscarEmpresaPorId(Long id) {
-        return alunoRepository.findById(id);
+        return empresaRepository.findById(id);
     }
 
-    public void atualizarEmpresa(Empresa aluno) {
-        alunoRepository.save(aluno);
+    public void atualizarEmpresa(Empresa empresaAtualizada) {
+        var empresa = empresaRepository.findById(empresaAtualizada.getId()).orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
     }
 
     public void removerEmpresa(Long id) {
-        alunoRepository.deleteById(id);
+        empresaRepository.deleteById(id);
     }
 }

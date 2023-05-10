@@ -16,8 +16,9 @@ public class Professor extends Usuario {
     @Column(name = "departamento")
     private String departamento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instituicao_id")
+
     private Instituicao instituicao;
 
     @Override

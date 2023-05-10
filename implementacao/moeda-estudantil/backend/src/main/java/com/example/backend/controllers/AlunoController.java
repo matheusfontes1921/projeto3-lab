@@ -74,4 +74,10 @@ public class AlunoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("saldo/{id}")
+    public ResponseEntity<Integer> consultaSaldo(@PathVariable Long id) {
+        Optional<Aluno> aluno = alunoService.buscarAlunoPorId(id);
+        return aluno.map(value -> ResponseEntity.ok(value.getSaldo())).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
