@@ -1,0 +1,85 @@
+/* body{
+    background: #F3B7F7;
+} */
+.login {
+    margin-top: -150px;
+    margin-left:400px;
+}
+
+.login h1{
+    
+}
+
+.imgs img{
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 35%;
+    margin-top: 5px;
+    margin-left: 61%;
+}
+
+.imgs p{
+   
+    margin-left:560px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.inputs label{
+    margin-left: 600px;
+    font-weight: bold;
+}
+
+.inputs input {
+    border-radius:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: aliceblue;
+    
+}
+
+.password input {
+    border-radius:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top:10px;
+    margin-left:12px;
+    background-color: aliceblue;
+    
+}
+
+.password label {
+    margin-left: 600px;
+    font-weight: bold;
+}
+
+.password p{
+    margin-left: 800px;
+    /* font-weight: bold; */
+    font-size: 12px;
+    cursor: pointer;
+    
+}
+
+.password button{
+    margin-left:600px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 120px;
+    padding-right: 120px;
+    background-color: antiquewhite;
+}
+
+.password button:hover{
+    outline-color: antiquewhite;
+}
+
+.password p:hover{
+    /* color: rgb(11, 6, 0); */
+    font-weight: bold;
+    transition: 0.1s;
+}
