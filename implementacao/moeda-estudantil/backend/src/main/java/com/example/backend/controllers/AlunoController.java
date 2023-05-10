@@ -1,6 +1,7 @@
 package com.example.backend.controllers;
 
 import com.example.backend.model.entities.Aluno;
+import com.example.backend.model.entities.Transfer;
 import com.example.backend.model.services.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -31,9 +31,9 @@ public class AlunoController {
         }
     }
 
-    @GetMapping("busca/{id}")
-    public ResponseEntity<Aluno> buscarAlunoPorId(@PathVariable Long id) {
-        Optional<Aluno> aluno = alunoService.buscarAlunoPorId(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Aluno> findById(@PathVariable Long id) {
+        Optional<Aluno> aluno = alunoService.findById(id);
         return aluno.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -45,7 +45,7 @@ public class AlunoController {
 
     @PutMapping("atualizar/{id}")
     public ResponseEntity<Aluno> atualizarAluno(@PathVariable Long id, @RequestBody Aluno alunoAtualizado) {
-        Optional<Aluno> alunoExistente = alunoService.buscarAlunoPorId(id);
+        Optional<Aluno> alunoExistente = alunoService.findById(id);
 
         if (alunoExistente.isPresent()) {
             Aluno aluno = alunoExistente.get();
@@ -65,7 +65,7 @@ public class AlunoController {
 
     @DeleteMapping("remover/{id}")
     public ResponseEntity<Void> removerAluno(@PathVariable Long id) {
-        Optional<Aluno> aluno = alunoService.buscarAlunoPorId(id);
+        Optional<Aluno> aluno = alunoService.findById(id);
 
         if (aluno.isPresent()) {
             alunoService.removerAluno(id);
@@ -77,7 +77,14 @@ public class AlunoController {
 
     @GetMapping("saldo/{id}")
     public ResponseEntity<Integer> consultaSaldo(@PathVariable Long id) {
-        Optional<Aluno> aluno = alunoService.buscarAlunoPorId(id);
+        Optional<Aluno> aluno = alunoService.findById(id);
         return aluno.map(value -> ResponseEntity.ok(value.getSaldo())).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("transferencias/{id}")
+    public ResponseEntity<List<Transfer>> listarTransferencias(@PathVariable Long id) {
+        Aluno aluno = alunoService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Professor não encontrado"));
+        return ResponseEntity.ok(aluno.getTransfers());
     }
 }
