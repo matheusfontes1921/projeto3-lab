@@ -2,11 +2,12 @@ package com.example.backend.model.services;
 
 import com.example.backend.model.entities.Professor;
 import com.example.backend.model.repositories.ProfessorRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Service
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
 

@@ -6,15 +6,13 @@ import com.example.backend.model.repositories.AlunoRepository;
 import com.example.backend.model.repositories.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
-public class TransferenciaService {
+public class TransferService {
 
     private final ProfessorRepository professorRepository;
     private final AlunoRepository alunoRepository;
 
-    public TransferenciaService(ProfessorRepository professorRepository, AlunoRepository alunoRepository) {
+    public TransferService(ProfessorRepository professorRepository, AlunoRepository alunoRepository) {
         this.professorRepository = professorRepository;
         this.alunoRepository = alunoRepository;
     }

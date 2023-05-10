@@ -1,5 +1,6 @@
 package com.example.backend.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Aluno extends Usuario {
     @Column(name = "endereco")
     private String endereco;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "instituicao_id")
     private Instituicao instituicao;

@@ -1,19 +1,17 @@
 package com.example.backend.controllers;
 
-import com.example.backend.model.services.TransferenciaService;
+import com.example.backend.model.services.TransferService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/transferencia")
 public class TransferController {
 
-    private final TransferenciaService meuService;
+    private final TransferService meuService;
 
-    public TransferController(TransferenciaService service) {
+    public TransferController(TransferService service) {
         this.meuService = service;
     }
 

@@ -21,12 +21,12 @@ public class Instituicao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private UUID id;
+    private Long id;
 
     @Column(name = "nome_do_curso")
     private String nomeDoCurso;
 
-    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "instituicao")
     private final List<Professor> professores = new ArrayList<>();
 
     // getters e setters
