@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,6 +32,9 @@ public class Aluno extends Usuario {
 
     @Column(name = "curso")
     private String curso;
+
+    @OneToMany(mappedBy = "aluno")
+    private List<Transfer> transfers = new ArrayList<>();
 
     public Aluno(String nome, String email, String senha, Integer saldo, String cpf, String rg, String endereco, Instituicao instituicao, String curso) {
         super(nome, email, senha, saldo);

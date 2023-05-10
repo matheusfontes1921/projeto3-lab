@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Table(name = "professor")
@@ -21,12 +24,16 @@ public class Professor extends Usuario {
 
     private Instituicao instituicao;
 
+    @OneToMany(mappedBy = "professor")
+    private List<Transfer> transfers = new ArrayList<>();
+
+
     @Override
     public void login() {
 
     }
 
-    public Professor( String nome, String email, String senha, Integer saldo, String cpf, String departamento, Instituicao instituicao) {
+    public Professor(String nome, String email, String senha, Integer saldo, String cpf, String departamento, Instituicao instituicao) {
         super(nome, email, senha, saldo);
         this.cpf = cpf;
         this.departamento = departamento;
