@@ -1,11 +1,11 @@
 package com.example.backend.model.entities;
 
+import com.example.backend.model.dto.TransferDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,8 @@ import java.util.List;
 @Setter
 @Table(name = "professor")
 @Entity
-public class   Professor extends Usuario {
+@NoArgsConstructor
+public class Professor extends Usuario {
 
     @Column(name = "cpf")
     private String cpf;
@@ -26,15 +27,10 @@ public class   Professor extends Usuario {
     @JoinColumn(name = "instituicao_id")
 
     private Instituicao instituicao;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "professor")
     private List<Transfer> transfers = new ArrayList<>();
 
-
-    @Override
-    public void login() {
-
-    }
 
     public Professor(String nome, String email, String senha, Integer saldo, String cpf, String departamento, Instituicao instituicao) {
         super(nome, email, senha, saldo);
@@ -43,9 +39,35 @@ public class   Professor extends Usuario {
         this.instituicao = instituicao;
     }
 
-    public Professor() {
-        super();
+    public List<TransferDTO> getTransfersDTO() {
+        List<TransferDTO> transfersDTO = new ArrayList<>();
+        for (Transfer transfer : transfers) {
+            String nomeAluno = transfer.getAluno().getNome();
+            Integer valor = transfer.getValor();
+            String descricao = transfer.getDescricao();
+
+            TransferDTO transferDTO = new TransferDTO(id, getNome(), nomeAluno, valor, descricao);
+            transfersDTO.add(transferDTO);
+        }
+        return transfersDTO;
     }
 
+    public void setTransfersDTO(List<TransferDTO> transfersDTO) {
+    }
 
+    // ...
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

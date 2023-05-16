@@ -15,13 +15,14 @@ public class TransferController {
         this.meuService = service;
     }
 
-    @PostMapping("/{idProfessor}/{idAluno}/{valor}")
+    @PostMapping("/{idProfessor}/{idAluno}/{valor}/{descricao}")
     public ResponseEntity<String> transferirSaldo(
             @PathVariable Long idProfessor,
             @PathVariable Long idAluno,
-            @PathVariable Integer valor) {
+            @PathVariable Integer valor,
+            @PathVariable String descricao) {
         try {
-            meuService.transferirSaldo(idProfessor, idAluno, valor);
+            meuService.transferirSaldo(idProfessor, idAluno, valor, descricao);
             return ResponseEntity.ok("Transferência realizada com sucesso");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

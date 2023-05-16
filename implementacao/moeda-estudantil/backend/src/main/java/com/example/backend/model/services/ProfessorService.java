@@ -1,12 +1,14 @@
 package com.example.backend.model.services;
 
+import com.example.backend.model.dto.TransferDTO;
 import com.example.backend.model.entities.Professor;
 import com.example.backend.model.repositories.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
@@ -24,7 +26,24 @@ public class ProfessorService {
     }
 
     public List<Professor> listaProfessores() {
-        return professorRepository.findAll();
+        List<Professor> professores = professorRepository.findAll();
+        return professores.stream()
+                .map(this::adicionarTransfersDTO)
+                .collect(Collectors.toList());
+    }
+
+    private Professor adicionarTransfersDTO(Professor professor) {
+        List<TransferDTO> transfersDTO = professor.getTransfers().stream()
+                .map(transfer -> new TransferDTO(
+                        transfer.getId(),
+                        professor.getNome(),
+                        transfer.getAluno().getNome(),
+                        transfer.getValor(),
+                        transfer.getDescricao()
+                ))
+                .collect(Collectors.toList());
+        professor.setTransfersDTO(transfersDTO);
+        return professor;
     }
 
     public void atualizar(Professor professorAtualizado) {

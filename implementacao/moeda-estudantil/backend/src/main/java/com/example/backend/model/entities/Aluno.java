@@ -13,9 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="aluno")
+@Table(name = "aluno")
 public class Aluno extends Usuario {
-
     @Column(name = "cpf")
     private String cpf;
 
@@ -43,10 +42,5 @@ public class Aluno extends Usuario {
         this.endereco = endereco;
         this.instituicao = instituicao;
         this.curso = curso;
-    }
-
-    @Override
-    public void login() {
-
     }
 }

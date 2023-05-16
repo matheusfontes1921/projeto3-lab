@@ -33,7 +33,6 @@ public abstract class Usuario {
 
     public Usuario() {}
 
-    public abstract void login();
 
     public void transferencia(Integer quantidade) {
         saldo += quantidade;
