@@ -79,8 +79,13 @@ public class EmpresaController {
 
     @GetMapping("/vantagens/{id}")
     public ResponseEntity<List<Vantagem>> listarVantagensEmpresa(@PathVariable Long id) {
-        var empresa = empresaService.buscarEmpresaPorId(id)
-                .orElseThrow(() -> new RuntimeException("empresa não encontrada"));
-        return ResponseEntity.ok(empresa.getListaDeVantagens());
+        var empresa = empresaService.buscarEmpresaPorId(id).orElseThrow(() -> new RuntimeException("empresa não encontrado"));
+
+        var transferList = empresa.getListaDeVantagens();
+        if (transferList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(transferList);
+        }
     }
 }
