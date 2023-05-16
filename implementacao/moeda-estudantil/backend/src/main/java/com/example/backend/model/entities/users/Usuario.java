@@ -1,10 +1,8 @@
-package com.example.backend.model.entities;
+package com.example.backend.model.entities.users;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.UUID;
 
 @Getter
 @Setter

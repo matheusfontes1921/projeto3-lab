@@ -1,6 +1,8 @@
-package com.example.backend.model.entities;
+package com.example.backend.model.entities.users;
 
 import com.example.backend.model.dto.TransferDTO;
+import com.example.backend.model.entities.Instituicao;
+import com.example.backend.model.entities.Transfer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;

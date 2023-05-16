@@ -1,6 +1,6 @@
 package com.example.backend.model.services;
 
-import com.example.backend.model.entities.Aluno;
+import com.example.backend.model.entities.users.Aluno;
 import com.example.backend.model.repositories.AlunoRepository;
 import org.springframework.stereotype.Service;
 

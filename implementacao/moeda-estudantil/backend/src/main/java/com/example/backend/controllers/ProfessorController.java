@@ -1,10 +1,7 @@
 package com.example.backend.controllers;
 
-import com.example.backend.model.entities.Aluno;
-import com.example.backend.model.entities.Professor;
-import com.example.backend.model.entities.Professor;
+import com.example.backend.model.entities.users.Professor;
 import com.example.backend.model.entities.Transfer;
-import com.example.backend.model.services.ProfessorService;
 import com.example.backend.model.services.ProfessorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

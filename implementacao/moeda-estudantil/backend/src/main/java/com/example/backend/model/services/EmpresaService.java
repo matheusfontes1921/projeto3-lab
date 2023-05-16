@@ -1,6 +1,6 @@
 package com.example.backend.model.services;
 
-import com.example.backend.model.entities.Empresa;
+import com.example.backend.model.entities.users.Empresa;
 import com.example.backend.model.repositories.EmpresaRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,11 @@ public class EmpresaService {
 
     public void atualizarEmpresa(Empresa empresaAtualizada) {
         var empresa = empresaRepository.findById(empresaAtualizada.getId()).orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
+        empresa.setNome(empresaAtualizada.getNome());
+        empresa.setEmail(empresaAtualizada.getEmail());
+        empresa.setSenha(empresaAtualizada.getSenha());
+        empresa.setSaldo(empresaAtualizada.getSaldo());
+        empresaRepository.save(empresa);
     }
 
     public void removerEmpresa(Long id) {

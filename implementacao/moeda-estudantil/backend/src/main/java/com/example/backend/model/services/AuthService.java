@@ -1,16 +1,14 @@
 package com.example.backend.model.services;
 
 import com.example.backend.model.dto.LoginDto;
-import com.example.backend.model.entities.Aluno;
-import com.example.backend.model.entities.Empresa;
-import com.example.backend.model.entities.Professor;
+import com.example.backend.model.entities.users.Aluno;
+import com.example.backend.model.entities.users.Empresa;
+import com.example.backend.model.entities.users.Professor;
 import com.example.backend.model.repositories.AlunoRepository;
 import com.example.backend.model.repositories.EmpresaRepository;
 import com.example.backend.model.repositories.ProfessorRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 public class AuthService {

@@ -1,7 +1,7 @@
 package com.example.backend.model.services;
 
 import com.example.backend.model.dto.TransferDTO;
-import com.example.backend.model.entities.Professor;
+import com.example.backend.model.entities.users.Professor;
 import com.example.backend.model.repositories.ProfessorRepository;
 import org.springframework.stereotype.Service;
 

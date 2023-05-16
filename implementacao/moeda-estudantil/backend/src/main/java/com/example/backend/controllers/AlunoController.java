@@ -1,6 +1,6 @@
 package com.example.backend.controllers;
 
-import com.example.backend.model.entities.Aluno;
+import com.example.backend.model.entities.users.Aluno;
 import com.example.backend.model.entities.Instituicao;
 import com.example.backend.model.entities.Transfer;
 import com.example.backend.model.services.AlunoService;

@@ -1,7 +1,7 @@
 package com.example.backend.model.services;
 
-import com.example.backend.model.entities.Aluno;
-import com.example.backend.model.entities.Professor;
+import com.example.backend.model.entities.users.Aluno;
+import com.example.backend.model.entities.users.Professor;
 import com.example.backend.model.entities.Transfer;
 import com.example.backend.model.repositories.AlunoRepository;
 import com.example.backend.model.repositories.ProfessorRepository;

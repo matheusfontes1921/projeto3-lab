@@ -1,8 +1,9 @@
 package com.example.backend.model.entities;
 
+import com.example.backend.model.entities.users.Aluno;
+import com.example.backend.model.entities.users.Professor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
