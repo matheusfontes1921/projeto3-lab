@@ -7,13 +7,15 @@ function Transacao() {
     const { id } = useParams();
     const [aluno, setAluno] = useState(0);
     const [quantidade, setQuantidade] = useState(0);
+    const [descricao, setDescricao] = useState(0);
 
 
     function handleTransfer() {
         event.preventDefault()
         const data = {
             aluno: aluno,
-            quantidade: quantidade
+            quantidade: quantidade,
+            descricao: descricao
         }
 
         axios.post(`http://localhost:8080/transferencia/${id}/${aluno}/${quantidade}`, {headers: { "Content-Type": "application/json" }})
@@ -44,6 +46,15 @@ function Transacao() {
                             onChange={(e) => setQuantidade(e.target.value)}
                         />
                     </div>
+                    <div className="form-row">
+                        <label htmlFor="descricao">Decrição:</label>
+                        <input
+                            type="text"
+                            id="descricao"
+                            placeholder="Descrição"
+                            onChange={(e) => setDescricao(e.target.value)}
+                        />
+                        </div>
                     <button className="submit-button" onClick={handleTransfer}>Realizar Transação</button>
                 </div>
             </div>

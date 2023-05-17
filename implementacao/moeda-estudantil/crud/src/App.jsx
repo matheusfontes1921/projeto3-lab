@@ -7,6 +7,8 @@ import CrudEmpresa from "./pages/crud-empresa.jsx";
 import Transacao from "./pages/transacao.jsx";
 import Transferencias from "./pages/tranferencias.jsx";
 import Professor from "./pages/Professor.jsx";
+import Vantagens from './pages/vantagens.jsx';
+import Listagem from './pages/listagem.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +16,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route index element={<Login />} />
+        <Route index element={<Listagem />} />
         <Route path={"aluno"} >
           <Route path={"transferencias/:id"} element={<Transferencias />}/>
         </Route>
