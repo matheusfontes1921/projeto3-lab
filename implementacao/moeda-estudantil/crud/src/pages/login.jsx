@@ -39,14 +39,11 @@ function Login() {
                 .then(response => {
                     if (response.status === 200) {
                         if(response.data.hasOwnProperty('curso')) {
-                            console.log(response)
-                            console.log(`aluno/transferencias/${response.data.id}`)
                             navigate(`aluno/transferencias/${response.data.id}`)
                         }else if(response.data.hasOwnProperty('departamento')) {
                             navigate(`professor/${response.data.id}`)
-                            console.log(`professor/${response.data.id}`)
                         } else {
-                            navigate('empresa')
+                            navigate(`empresa/${response.data.id}`)
                         }
                     }
                 })

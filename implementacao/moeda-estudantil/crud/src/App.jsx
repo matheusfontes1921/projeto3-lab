@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/login.jsx";
 import AlunoCrud from "./pages/crud-aluno.jsx";
@@ -9,14 +8,14 @@ import Transferencias from "./pages/tranferencias.jsx";
 import Professor from "./pages/Professor.jsx";
 import Vantagens from './pages/vantagens.jsx';
 import Listagem from './pages/listagem.jsx';
+import Empresa from "./pages/empresa.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <Routes>
-        <Route index element={<Listagem />} />
+        <Route index element={<Login />} />
         <Route path={"aluno"} >
           <Route path={"transferencias/:id"} element={<Transferencias />}/>
         </Route>
@@ -25,12 +24,17 @@ function App() {
           <Route path={"transferencias"} element={<Transferencias />}/>
           <Route path={"transacao"} element={<Transacao />} />
         </Route>
+        <Route path={"empresa/:id"}>
+          <Route index element={<Empresa />} />
+          <Route path={"vantagens"} element={<Listagem />} />
+          <Route path={"crud/vantagens"} element={<Vantagens />} />
+        </Route>
         <Route path={"home"} element={<Home />} />
         <Route path={"crud"}>
           <Route path={"aluno"} element={<AlunoCrud />} />
           <Route path={"empresa"} element={<CrudEmpresa />} />
         </Route>
-
+        <Route path={"listaVantgens"} element={<Listagem />} />
       </Routes>
 
     </>
