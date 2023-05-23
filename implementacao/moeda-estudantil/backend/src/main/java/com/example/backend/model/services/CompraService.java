@@ -73,4 +73,10 @@ public class CompraService {
     public Compra findById(Long id) {
         return compraRepository.findById(id).orElseThrow(() -> new RuntimeException("Compra não encontrada"));
     }
+
+    public Compra iniciarCompra(Long idAluno) {
+        var aluno = alunoRepository.findById(idAluno).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        aluno.getCompraList().add(new Compra());
+        return compraRepository.save(new Compra());
+    }
 }
