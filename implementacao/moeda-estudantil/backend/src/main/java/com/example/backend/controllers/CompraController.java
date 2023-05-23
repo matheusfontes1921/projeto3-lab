@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import com.example.backend.model.entities.Vantagem;
 import com.example.backend.model.services.CompraService;
 import com.example.backend.model.services.VantagemService;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +28,19 @@ public class CompraController {
         return ResponseEntity.ok(compraService.finalizar(id));
     }
 
-    @PostMapping("/apagarItem/{id}")
+    @DeleteMapping("/apagarItem/{id}")
     public ResponseEntity<?> apagarItem(@PathVariable Long id, @RequestBody Long idItem) {
         var compra = compraService.findById(id);
-        var item = vantagemService.findById(idItem);
-        return ResponseEntity.ok(compraService.removerItem(compra, )
+        Vantagem item = vantagemService.findById(idItem);
+        return ResponseEntity.ok(compraService.removerItem(compra, item));
     }
+
+    @PostMapping("/adicionarItem/{id}")
+    public ResponseEntity<?> adicionarItem(@PathVariable Long id, @RequestBody Long idItem) {
+        var compra = compraService.findById(id);
+        Vantagem item = vantagemService.findById(idItem);
+        return ResponseEntity.ok(compraService.adicionarItem(compra, item));
+    }
+
 }
 

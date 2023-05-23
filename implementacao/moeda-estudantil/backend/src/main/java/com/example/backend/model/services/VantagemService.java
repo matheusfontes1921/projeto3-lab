@@ -22,4 +22,8 @@ public class VantagemService {
     public List<Vantagem> findAll() {
         return vantagemRepository.findAll();
     }
+
+    public Vantagem findById(Long idItem) {
+        return vantagemRepository.findById(idItem).orElseThrow(() -> new RuntimeException("Vantagem não encontrada"));
+    }
 }
