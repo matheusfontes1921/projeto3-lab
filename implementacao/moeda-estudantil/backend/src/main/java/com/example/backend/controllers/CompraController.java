@@ -42,5 +42,9 @@ public class CompraController {
         return ResponseEntity.ok(compraService.adicionarItem(compra, item));
     }
 
+    @PostMapping("/iniciar")
+    public ResponseEntity<?> iniciarCompra(@RequestBody Long idAluno) {
+        return ResponseEntity.ok(compraService.iniciarCompra(idAluno));
+    }
 }
 

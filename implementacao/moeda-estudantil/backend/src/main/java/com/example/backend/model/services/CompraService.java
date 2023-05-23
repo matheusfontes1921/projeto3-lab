@@ -2,6 +2,7 @@ package com.example.backend.model.services;
 
 import com.example.backend.model.entities.Compra;
 import com.example.backend.model.entities.Vantagem;
+import com.example.backend.model.repositories.AlunoRepository;
 import com.example.backend.model.repositories.CompraRepository;
 import com.example.backend.model.repositories.VantagemRepository;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,11 @@ import java.util.List;
 @Service
 public class CompraService {
     private final CompraRepository compraRepository;
-    private final AlunoService alunoRepository;
+    private final AlunoRepository alunoRepository;
     private final EmpresaService empresaRepository;
     private final VantagemRepository vantagemRepository;
 
-    public CompraService(CompraRepository compraRepository, AlunoService alunoRepository, EmpresaService empresaRepository, VantagemRepository vantagemRepository) {
+    public CompraService(CompraRepository compraRepository, AlunoRepository alunoRepository, EmpresaService empresaRepository, VantagemRepository vantagemRepository) {
         this.compraRepository = compraRepository;
         this.alunoRepository = alunoRepository;
         this.empresaRepository = empresaRepository;
@@ -72,5 +73,13 @@ public class CompraService {
 
     public Compra findById(Long id) {
         return compraRepository.findById(id).orElseThrow(() -> new RuntimeException("Compra não encontrada"));
+    }
+
+    public Compra iniciarCompra(Long idAluno) {
+        var aluno = alunoRepository.findById(idAluno).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        var compra= new Compra(aluno);
+        aluno.getCompraList().add(compra);
+        alunoRepository.save(aluno);
+        return compraRepository.save(compra);
     }
 }
