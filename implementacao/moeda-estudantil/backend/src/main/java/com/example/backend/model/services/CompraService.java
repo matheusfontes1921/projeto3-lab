@@ -2,6 +2,7 @@ package com.example.backend.model.services;
 
 import com.example.backend.model.entities.Compra;
 import com.example.backend.model.entities.Vantagem;
+import com.example.backend.model.entities.users.Aluno;
 import com.example.backend.model.repositories.AlunoRepository;
 import com.example.backend.model.repositories.CompraRepository;
 import com.example.backend.model.repositories.VantagemRepository;
@@ -34,7 +35,7 @@ public class CompraService {
     }
 
     public ResponseEntity<?> adicionarItem(Compra compra, Vantagem vantagem) {
-        compra.getVantagens().add(vantagem);
+        compra.addVantagem(vantagem);
         vantagem.getEmpresa().getListaDeVantagens().remove(vantagem);
         empresaRepository.salvarEmpresa(vantagem.getEmpresa());
         compraRepository.save(compra);
@@ -76,10 +77,12 @@ public class CompraService {
     }
 
     public Compra iniciarCompra(Long idAluno) {
-        var aluno = alunoRepository.findById(idAluno).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
-        var compra= new Compra(aluno);
+        Aluno aluno = alunoRepository.findById(idAluno).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        Compra compra = new Compra(aluno);
         aluno.getCompraList().add(compra);
         alunoRepository.save(aluno);
-        return compraRepository.save(compra);
+        compraRepository.save(compra);
+
+        return compra;
     }
 }

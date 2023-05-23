@@ -38,7 +38,7 @@ function Transacao() {
         } else {
             axios.post(`http://localhost:8080/transferencia/${id}/${aluno}/${quantidade}/${descricao}`, {headers: { "Content-Type": "application/json" }})
                 .then(res => {
-                    if (res.status === 201) {
+                    if (res.status === 201 || res.status === 200) {
                         setSaldo(saldo - quantidade);
                         const alert = document.getElementById("alert");
                         alert.innerHTML = "Created " + res.status;

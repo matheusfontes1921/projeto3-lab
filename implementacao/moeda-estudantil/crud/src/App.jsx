@@ -9,6 +9,7 @@ import Professor from "./pages/Professor.jsx";
 import Vantagens from './pages/vantagens.jsx';
 import Listagem from './pages/listagem.jsx';
 import Empresa from "./pages/empresa.jsx";
+import Aluno from "./pages/Aluno.jsx";
 
 function App() {
 
@@ -16,8 +17,10 @@ function App() {
     <>
       <Routes>
         <Route index element={<Login />} />
-        <Route path={"aluno"} >
-          <Route path={"transferencias/:id"} element={<Transferencias />}/>
+        <Route path={"aluno/:id"} >
+          <Route index element={<Aluno /> } />
+          <Route path={"transferencias"} element={<Transferencias />}/>
+          <Route path={"listaVantgens"} element={<Listagem />} />
         </Route>
         <Route path={"professor/:id"}>
           <Route index element={<Professor />} />
@@ -34,7 +37,7 @@ function App() {
           <Route path={"aluno"} element={<AlunoCrud />} />
           <Route path={"empresa"} element={<CrudEmpresa />} />
         </Route>
-        <Route path={"listaVantgens"} element={<Listagem />} />
+
       </Routes>
 
     </>

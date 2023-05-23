@@ -37,6 +37,7 @@ public class Aluno extends Usuario {
 
     @OneToMany(mappedBy = "aluno")
     private final List<Transfer> transfers = new ArrayList<>();
+
     @OneToMany(mappedBy = "aluno")
     private final List<Compra> compraList = new ArrayList<>();
 

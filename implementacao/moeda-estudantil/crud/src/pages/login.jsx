@@ -39,7 +39,7 @@ function Login() {
                 .then(response => {
                     if (response.status === 200) {
                         if(response.data.hasOwnProperty('curso')) {
-                            navigate(`aluno/transferencias/${response.data.id}`)
+                            navigate(`aluno/${response.data.id}`)
                         }else if(response.data.hasOwnProperty('departamento')) {
                             navigate(`professor/${response.data.id}`)
                         } else {

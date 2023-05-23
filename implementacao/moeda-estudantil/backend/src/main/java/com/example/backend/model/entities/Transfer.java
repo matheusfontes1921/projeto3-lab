@@ -31,6 +31,7 @@ public class Transfer {
 
     @Column
     private Integer valor;
+
     @Column
     private String descricao;
 

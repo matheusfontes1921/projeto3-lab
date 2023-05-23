@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import com.example.backend.model.entities.Compra;
 import com.example.backend.model.entities.Vantagem;
 import com.example.backend.model.services.CompraService;
 import com.example.backend.model.services.VantagemService;
@@ -25,14 +26,16 @@ public class CompraController {
 
     @PostMapping("/finalizar/{id}")
     public ResponseEntity<?> finalizarCompra(@PathVariable Long id) {
-        return ResponseEntity.ok(compraService.finalizar(id));
+        Compra compra = compraService.finalizar(id);
+        return ResponseEntity.ok().body(compra.getId());
     }
 
-    @DeleteMapping("/apagarItem/{id}")
-    public ResponseEntity<?> apagarItem(@PathVariable Long id, @RequestBody Long idItem) {
+    @DeleteMapping("/apagarItem/{id}/{idItem}")
+    public ResponseEntity<?> apagarItem(@PathVariable Long id, @PathVariable Long idItem) {
         var compra = compraService.findById(id);
         Vantagem item = vantagemService.findById(idItem);
-        return ResponseEntity.ok(compraService.removerItem(compra, item));
+        compraService.removerItem(compra, item);
+        return ResponseEntity.ok().body(compra.getId());
     }
 
     @PostMapping("/adicionarItem/{id}")
@@ -44,7 +47,8 @@ public class CompraController {
 
     @PostMapping("/iniciar")
     public ResponseEntity<?> iniciarCompra(@RequestBody Long idAluno) {
-        return ResponseEntity.ok(compraService.iniciarCompra(idAluno));
+        Compra compra = compraService.iniciarCompra(idAluno);
+        return ResponseEntity.ok().body(compra.getId());
     }
 }
 
