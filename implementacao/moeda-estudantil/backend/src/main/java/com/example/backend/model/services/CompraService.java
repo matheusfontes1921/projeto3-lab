@@ -17,12 +17,14 @@ public class CompraService {
     private final AlunoRepository alunoRepository;
     private final EmpresaService empresaRepository;
     private final VantagemRepository vantagemRepository;
+    private final EmailService emailService;
 
-    public CompraService(CompraRepository compraRepository, AlunoRepository alunoRepository, EmpresaService empresaRepository, VantagemRepository vantagemRepository) {
+    public CompraService(CompraRepository compraRepository, AlunoRepository alunoRepository, EmpresaService empresaRepository, VantagemRepository vantagemRepository, EmailService emailService) {
         this.compraRepository = compraRepository;
         this.alunoRepository = alunoRepository;
         this.empresaRepository = empresaRepository;
         this.vantagemRepository = vantagemRepository;
+        this.emailService = emailService;
     }
 
     public Integer valorTotalCompra(Long id) {
@@ -60,10 +62,23 @@ public class CompraService {
         if (compra.getAluno().getSaldo() < valorTotalCompra(compra.getId())) {
             throw new RuntimeException("Saldo insuficiente");
         } else {
+
             compra.getAluno().setSaldo(compra.getAluno().getSaldo() - valorTotalCompra(compra.getId()));
             compra.getAluno().getCompraList().add(compra);
-            return compraRepository.save(compra);
+            compraRepository.save(compra);
+            var conteudoEmail = dadosEmail(compra);
+            emailService.enviarEmail(compra.getAluno().getEmail(), "Compra realizada no SITE", conteudoEmail);
+
+            return compraRepository.saveAndFlush(compra);
         }
+
+    }
+
+    private String dadosEmail(Compra compra) {
+        List<String> empresas = compra.getVantagens().stream().map(v -> v.getEmpresa().getNome()).toList();
+        return "Foi feita uma compra na loja" + empresas +
+                "no valor de" + valorTotalCompra(compra.getId()) + "\n\n" + "ID DA COMPRA :" + compra.getId() + "\n\n" + compra.getAluno() + "\nOBRIGADO POR COMPRAR NO SITE";
+
 
     }
 

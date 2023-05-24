@@ -32,12 +32,11 @@ public class TestConfig implements CommandLineRunner {
         Professor professor = new Professor("Joao", "joao@gmail.com", "123", 350, "616161616", "ICEI", i1);
         Aluno aluno1 = new Aluno("Claudio", "claudio@gmail.com", "1234", 0, "154898-31", "1711546", "rua 6x1 Vespasiano", i1, "Enhenharia De Software");
         Empresa empresa = new Empresa("SUPERMECADOS BH", "matheusfontes1921@gmail.com", "1921", 0);
-        Aluno aluno2 = new Aluno("lucas","lucassr614@gmail.com","1234",0,"154898-31","1711546","rua 6x1 Vespasiano",i1,"Enhenharia De Software");
 
         empresaRepository.save(empresa);
         instituicaoRepository.save(i1);
         professorRepository.save(professor);
         alunoRepository.save(aluno1);
-        alunoRepository.save(aluno2);
+
     }
 }
