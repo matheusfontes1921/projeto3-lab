@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Transfer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_transacao")
     private  Long id;
 

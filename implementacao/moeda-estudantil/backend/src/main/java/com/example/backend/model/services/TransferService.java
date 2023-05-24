@@ -14,11 +14,13 @@ public class TransferService {
     private final ProfessorRepository professorRepository;
     private final AlunoRepository alunoRepository;
     private final TransferRepository transferRepository;
+    private final EmailService emailService;
 
-    public TransferService(ProfessorRepository professorRepository, AlunoRepository alunoRepository, TransferRepository transferRepository) {
+    public TransferService(ProfessorRepository professorRepository, AlunoRepository alunoRepository, TransferRepository transferRepository, EmailService emailService) {
         this.professorRepository = professorRepository;
         this.alunoRepository = alunoRepository;
         this.transferRepository = transferRepository;
+        this.emailService = emailService;
     }
 
     public void transferirSaldo(Long idProfessor, Long idAluno, Integer valorTransferencia, String descricao) {
@@ -28,12 +30,22 @@ public class TransferService {
         if (professor.getSaldo().compareTo(valorTransferencia) >= 0) {
             Transfer transfer = new Transfer(professor, aluno, valorTransferencia, descricao);
             transferir(transfer);
+            transferRepository.save(transfer);
+            String conteudoTransferencia = getDados(professor, aluno, transfer);
+            emailService.enviarEmail(aluno.getEmail(), "Transferência realizada", conteudoTransferencia);
             alunoRepository.save(aluno);
             professorRepository.save(professor);
-            transferRepository.save(transfer);
+
         } else {
             throw new RuntimeException("Saldo do professor insuficiente para realizar a transferência");
         }
+    }
+
+    private static String getDados(Professor professor, Aluno aluno, Transfer transfer) {
+        return "O professor: " + professor.getNome() + " transferiu: " + transfer.getValor() + " para o Aluno: " + aluno.getNome() +
+                "\n Descrição: " + transfer.getDescricao() + "\n"
+                +"Valor da transferencia: " + transfer.getValor() + "\n"
+                + "Id Transferencia: " + transfer.getId();
     }
 
 
