@@ -152,7 +152,10 @@ export default function Listagem() {
 
                     axios.post(`http://localhost:8080/compras/finalizar/${idCompra}`)
                         .then((res) => {
-                            console.log(res)
+                            console.log("Finalizar", res)
+                            document.getElementById("iniciar").innerText = "Iniciar Compras"
+                        })
+                        .catch((err) => {
                             document.getElementById("iniciar").innerText = "Iniciar Compras"
                         })
                 })
