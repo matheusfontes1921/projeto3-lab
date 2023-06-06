@@ -68,7 +68,7 @@ public class CompraService {
             compraRepository.save(compra);
             var conteudoEmail = dadosEmail(compra);
             emailService.enviarEmail(compra.getAluno().getEmail(), "Compra realizada no SITE", conteudoEmail);
-
+            emailService.enviarEmail(compra.getVantagens().get(0).getEmpresa().getEmail(), "Compra realizada no SITE", conteudoEmail);
             return compraRepository.saveAndFlush(compra);
         }
 
@@ -77,7 +77,7 @@ public class CompraService {
     private String dadosEmail(Compra compra) {
         List<String> empresas = compra.getVantagens().stream().map(v -> v.getEmpresa().getNome()).toList();
         return "Foi feita uma compra na loja" + empresas +
-                "no valor de" + valorTotalCompra(compra.getId()) + "\n\n" + "ID DA COMPRA :" + compra.getId() + "\n\n" + compra.getAluno() + "\nOBRIGADO POR COMPRAR NO SITE";
+                "no valor de" + valorTotalCompra(compra.getId()) + "\n\n" + "ID DA COMPRA :" + compra.getId() + "\n\n" + compra.getAluno().getNome() + "\nOBRIGADO POR COMPRAR NO SITE";
 
 
     }

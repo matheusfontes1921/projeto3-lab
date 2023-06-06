@@ -69,9 +69,7 @@ function Login() {
                     placeholder="Digite seu nome de usuário"
                     onChange={(event) => setUser({...user, username: event.target.value})}
                     required/>
-            </div>
-            <div className="password">
-            <label>Senha: </label>
+                <label>Senha: </label>
                 <input
                     type="password"
                     className="password-input"
@@ -79,6 +77,8 @@ function Login() {
                     onChange={(event) => setUser({...user, password: event.target.value})}
                     required/>
                 <p>Esqueceu sua senha?</p>
+            </div>
+            <div className="password">
                 <button type={"submit"}>Login</button>
             </div>
        </form>

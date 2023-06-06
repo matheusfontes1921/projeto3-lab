@@ -30,7 +30,7 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) {
         Instituicao i1 = new Instituicao(null, "Puc");
         Professor professor = new Professor("Joao", "joao@gmail.com", "123", 350, "616161616", "ICEI", i1);
-        Aluno aluno1 = new Aluno("Claudio", "claudio@gmail.com", "1234", 0, "154898-31", "1711546", "rua 6x1 Vespasiano", i1, "Enhenharia De Software");
+        Aluno aluno1 = new Aluno("Claudio", "lucassr614@gmail.com", "1234", 0, "154898-31", "1711546", "rua 6x1 Vespasiano", i1, "Enhenharia De Software");
         Empresa empresa = new Empresa("SUPERMECADOS BH", "matheusfontes1921@gmail.com", "1921", 0);
 
         empresaRepository.save(empresa);

@@ -22,21 +22,29 @@ export default function Vantagens() {
 
     function cadastrar() {
         const { name, description, foto, custo } = vantagem
-        axios.post(`http://localhost:8080/empresas/${id}/${name}/${description}/${foto}/${custo}`,{}, {headers: { "Content-Type": "application/json" }})
-            .then(res => {
-                if (res.status === 201) {
-                    setVantagem(vantagemInicial);
-                    const alert = document.getElementById("alert");
-                    alert.innerHTML = "Created " + res.status;
-                    alert.style.color = "green";
-                    alert.style.display = "inline-block"
-                } else {
-                    const alert = document.getElementById("alert");
-                    alert.innerHTML = "Error" + res.status;
-                    alert.style.color = "red";
-                    alert.style.display = "inline-block"
-                }
-            })
+
+        if(custo > 0) {
+            axios.post(`http://localhost:8080/empresas/${id}/${name}/${description}/${foto}/${custo}`,{}, {headers: { "Content-Type": "application/json" }})
+                .then(res => {
+                    if (res.status === 201) {
+                        setVantagem(vantagemInicial);
+                        const alert = document.getElementById("alert");
+                        alert.innerHTML = "Created " + res.status;
+                        alert.style.color = "green";
+                        alert.style.display = "inline-block"
+                    } else {
+                        const alert = document.getElementById("alert");
+                        alert.innerHTML = "Error" + res.status;
+                        alert.style.color = "red";
+                        alert.style.display = "inline-block"
+                    }
+                })
+        } else {
+            const alert = document.getElementById("alert");
+            alert.innerHTML = "Valor invalido";
+            alert.style.color = "red";
+            alert.style.display = "inline-block"
+        }
     }
 
     function clearAlert() {
