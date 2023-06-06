@@ -2,6 +2,7 @@ package com.example.backend.model.services;
 
 import com.example.backend.model.entities.users.Aluno;
 import com.example.backend.model.repositories.AlunoRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,34 +17,80 @@ public class AlunoService {
         this.alunoRepository = alunoRepository;
     }
 
-    public Aluno salvarAluno(Aluno aluno) {
-        return alunoRepository.save(aluno);
+    public ResponseEntity<?> salvarAluno(Aluno aluno) {
+        if (alunoRepository.findById(aluno.getId()).isPresent()) {
+            return ResponseEntity.badRequest().body("Aluno já cadastrado");
+        } else {
+            alunoRepository.save(aluno);
+            return ResponseEntity.ok().body("Aluno cadastrado com sucesso");
+        }
     }
 
-    public List<Aluno> listarAlunos() {
-        return alunoRepository.findAll();
+    public ResponseEntity<?> listarAlunos() {
+        List<Aluno> alunos = alunoRepository.findAll();
+        if (alunos.isEmpty()) {
+            return ResponseEntity.badRequest().body("Não há alunos cadastrados");
+        } else {
+            return ResponseEntity.ok().body(alunos);
+        }
     }
 
-    public Optional<Aluno> findById(Long id) {
-        return alunoRepository.findById(id);
+    public ResponseEntity<?> findById(Long id) {
+        Optional<Aluno> aluno = alunoRepository.findById(id);
+        if (aluno.isPresent()) {
+            Aluno objAluno = aluno.get();
+            return ResponseEntity.ok().body(objAluno);
+        } else {
+            return ResponseEntity.badRequest().body("Aluno não encontrado");
+        }
     }
 
-    public void atualizarAluno(Aluno alunoAtualizado) {
-        Aluno aluno = alunoRepository.findById(alunoAtualizado.getId())
-                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
-        aluno.setNome(alunoAtualizado.getNome());
-        aluno.setEmail(alunoAtualizado.getEmail());
-        aluno.setSenha(alunoAtualizado.getSenha());
-        aluno.setSaldo(alunoAtualizado.getSaldo());
-        aluno.setCpf(alunoAtualizado.getCpf());
-        aluno.setRg(alunoAtualizado.getRg());
-        aluno.setEndereco(alunoAtualizado.getEndereco());
-        aluno.setInstituicao(alunoAtualizado.getInstituicao());
-        aluno.setCurso(alunoAtualizado.getCurso());
-        alunoRepository.save(aluno);
+    public ResponseEntity<?> atualizarAluno(Long id, Aluno alunoAtualizado) {
+        var aluno = alunoRepository.findById(id);
+        if (aluno.isPresent()) {
+            var alunoobj = aluno.get();
+            alunoobj.setNome(alunoAtualizado.getNome());
+            alunoobj.setEmail(alunoAtualizado.getEmail());
+            alunoobj.setSenha(alunoAtualizado.getSenha());
+            alunoobj.setSaldo(alunoAtualizado.getSaldo());
+            alunoobj.setCpf(alunoAtualizado.getCpf());
+            alunoobj.setRg(alunoAtualizado.getRg());
+            alunoobj.setEndereco(alunoAtualizado.getEndereco());
+            alunoobj.setInstituicao(alunoAtualizado.getInstituicao());
+            alunoobj.setCurso(alunoAtualizado.getCurso());
+            alunoRepository.save(alunoobj);
+            return ResponseEntity.ok().body("Aluno atualizado com sucesso");
+        } else return ResponseEntity.badRequest().body("Aluno não encontrado");
     }
 
-    public void removerAluno(Long id) {
-        alunoRepository.deleteById(id);
+    public ResponseEntity<?> removerAluno(Long id) {
+        Optional<Aluno> aluno = alunoRepository.findById(id);
+        if (aluno.isPresent()) {
+            alunoRepository.deleteById(id);
+            return ResponseEntity.ok().body("Aluno removido com sucesso");
+        } else {
+            return ResponseEntity.badRequest().body("Aluno não encontrado");
+        }
     }
+
+    public ResponseEntity<?> consultaSaldo(Long id) {
+        Optional<Aluno> aluno = alunoRepository.findById(id);
+        if (aluno.isPresent()) {
+            Aluno objAluno = aluno.get();
+            return ResponseEntity.ok().body(objAluno.getSaldo());
+        } else {
+            return ResponseEntity.badRequest().body("Aluno não encontrado");
+        }
+    }
+
+    public ResponseEntity<?> listarTransferencias(Long id) {
+        Optional<Aluno> aluno = alunoRepository.findById(id);
+        if (aluno.isPresent()) {
+            Aluno objAluno = aluno.get();
+            return ResponseEntity.ok().body(objAluno.getTransfers());
+        } else {
+            return ResponseEntity.badRequest().body("Aluno não encontrado");
+        }
+    }
+
 }
