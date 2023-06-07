@@ -1,8 +1,12 @@
 package com.example.backend.controllers;
 
+import com.example.backend.model.dto.TransferDTO;
+import com.example.backend.model.entities.Transfer;
 import com.example.backend.model.services.TransferService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -28,5 +32,9 @@ public class TransferController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+    @GetMapping
+    public List<Transfer> getTransfers(){
+        return meuService.getAllTransfers();
     }
 }

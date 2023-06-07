@@ -19,6 +19,7 @@ public class TransferDTO {
         this.valor = valor;
         this.descricao = descricao;
     }
+    public TransferDTO(){}
 
     // getters e setters
 }
