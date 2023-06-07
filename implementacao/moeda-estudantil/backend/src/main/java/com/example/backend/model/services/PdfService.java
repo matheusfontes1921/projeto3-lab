@@ -39,12 +39,12 @@ public class PdfService {
             document.add(title);
             document.add(new Paragraph("Ganhos: "));
             for (Transfer transfer : transfers) {
-                Paragraph paragraph = new Paragraph("Id: " + transfer.getId() + " / Valor: " + transfer.getValor());
+                Paragraph paragraph = new Paragraph("Id: " + transfer.getId() + " / Valor: " + transfer.getValor() + " / Recebido do professor: " + transfer.getProfessor().getNome());
                 document.add(paragraph);
             }
-            document.add(new Paragraph("Perdas: "));
+            document.add(new Paragraph("Compras: "));
             for (Compra compra : compras) {
-                Paragraph paragraph = new Paragraph("Id: " + compra.getId() + " / Valor: " + compra.getVantagens().get(0).getCusto());
+                Paragraph paragraph = new Paragraph("Id: " + compra.getId() + " / Valor: " + compra.getVantagens().get(0).getCusto() + " / Descrição: " + compra.getVantagens().get(0).getDescricao());
                 document.add(paragraph);
             }
             document.close();

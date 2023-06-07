@@ -19,10 +19,10 @@ public class CompraController {
         this.vantagemService = vantagemService;
     }
 
-    @GetMapping("/aluno/{id})")
-    public ResponseEntity<?> listarComprasDoAluno(@PathVariable Long id) {
-        return ResponseEntity.ok(compraService.listarComprasDoAluno(id));
-    }
+        @GetMapping("/aluno/{id})")
+        public ResponseEntity<?> listarComprasDoAluno(@PathVariable Long id) {
+            return ResponseEntity.ok(compraService.listarComprasDoAluno(id));
+        }
 
     @PostMapping("/finalizar/{id}")
     public ResponseEntity<?> finalizarCompra(@PathVariable Long id) {
