@@ -1,5 +1,7 @@
 package com.example.backend.model.services;
 
+import com.example.backend.model.dto.TransacoesDTO;
+import com.example.backend.model.dto.TransferDTO;
 import com.example.backend.model.entities.users.Aluno;
 import com.example.backend.model.entities.users.Professor;
 import com.example.backend.model.entities.Transfer;
@@ -7,6 +9,9 @@ import com.example.backend.model.repositories.AlunoRepository;
 import com.example.backend.model.repositories.ProfessorRepository;
 import com.example.backend.model.repositories.TransferRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransferService {
@@ -66,6 +71,26 @@ public class TransferService {
     private Integer convertePositivo(Integer valor) {
         return Math.abs(valor);
     }
+    public List<Transfer> getAllTransfers() {
+        List<Transfer> transfers = transferRepository.findAll();
+        return (transfers);
+    }
+
+//    private List<TransacoesDTO> mapTransfersToDTO(List<Transfer> transfers) {
+//        return transfers.stream()
+//                .map(this::mapTransferToDTO)
+//                .collect(Collectors.toList());
+//    }
+//
+//    private TransacoesDTO mapTransferToDTO(Transfer transfer) {
+//        TransacoesDTO transacoesDTO = new TransferDTO();
+//        // Mapeie os atributos relevantes da entidade Transfer para o DTO TransferDTO
+//        transferDTO.setId(transfer.getId());
+//        transferDTO.setValor(transfer.getValor());
+//        // Outros atributos...
+//        return transferDTO;
+//    }
+
 }
 
 
