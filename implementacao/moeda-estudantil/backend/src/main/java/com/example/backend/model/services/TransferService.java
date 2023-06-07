@@ -76,21 +76,6 @@ public class TransferService {
         return (transfers);
     }
 
-//    private List<TransacoesDTO> mapTransfersToDTO(List<Transfer> transfers) {
-//        return transfers.stream()
-//                .map(this::mapTransferToDTO)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private TransacoesDTO mapTransferToDTO(Transfer transfer) {
-//        TransacoesDTO transacoesDTO = new TransferDTO();
-//        // Mapeie os atributos relevantes da entidade Transfer para o DTO TransferDTO
-//        transferDTO.setId(transfer.getId());
-//        transferDTO.setValor(transfer.getValor());
-//        // Outros atributos...
-//        return transferDTO;
-//    }
-
 }
 
 

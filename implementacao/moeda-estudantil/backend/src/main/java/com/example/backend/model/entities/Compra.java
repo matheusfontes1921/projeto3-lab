@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 @NoArgsConstructor
 @Getter
 @Table(name = "compras")
