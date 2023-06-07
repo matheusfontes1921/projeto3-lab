@@ -8,11 +8,13 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
+import '../assets/transferencias.css'
 
 export default function Transferencias() {
     const { id } = useParams();
     const [transferencias, setTransferencias] = useState([])
     const [saldo, setSaldo] = useState(0)
+    const [pdfGerado,setPdfGerado] = useState(false);
 
     useEffect(() => {
         const tipo = window.location.pathname.split('/')[1]
@@ -54,6 +56,27 @@ export default function Transferencias() {
     function back() {
         window.location.pathname = document.location.pathname.split("transferencias")[0]
     }
+    function gerarPdf(){
+        axios.get(`http://localhost:8080/extrato/pdf/${id}`, {
+            responseType: "blob",
+        })
+        .then((response) => {
+            if(response.status === 200) {
+                const blob = new Blob([response.data],{type:"application/pdf"});
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.target = "_blank";
+                link.download = "extrato.pdf";
+                link.click();
+                URL.revokeObjectURL(url);
+                setPdfGerado(true);
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
 
     return(
         <div style={{display: "flex", flexDirection: "column", width: "100vw", height: "100vh", alignItems: "center", justifyContent: "flex-start"}}>
@@ -94,6 +117,9 @@ export default function Transferencias() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <div className="pdf-content">
+                    <button onClick={gerarPdf}>Gerar PDF</button>
+                </div>
             </div>
         </div>
     )
