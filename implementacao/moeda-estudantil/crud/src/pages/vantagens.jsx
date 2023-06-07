@@ -108,6 +108,7 @@ export default function Vantagens() {
                             label="Foto"
                             variant="outlined"
                             value={vantagem.foto}
+                            inputProps={{maxLenght: undefined }}
                             multiline
                             onChange={(event) =>
                                 setVantagem({...vantagem, foto: event.target.value})
