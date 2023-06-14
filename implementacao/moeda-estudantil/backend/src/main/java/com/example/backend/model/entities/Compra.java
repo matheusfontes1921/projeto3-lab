@@ -1,6 +1,7 @@
 package com.example.backend.model.entities;
 
 import com.example.backend.model.entities.users.Aluno;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Table(name = "compras")
-
 public class Compra {
 
     @Id
@@ -23,6 +23,7 @@ public class Compra {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private Aluno aluno;
 
     @OneToMany(fetch = FetchType.EAGER)

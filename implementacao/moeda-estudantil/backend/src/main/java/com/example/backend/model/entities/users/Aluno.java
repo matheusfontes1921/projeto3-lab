@@ -4,6 +4,7 @@ import com.example.backend.model.entities.Compra;
 import com.example.backend.model.entities.Instituicao;
 import com.example.backend.model.entities.Transfer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,7 @@ public class Aluno extends Usuario {
     private final List<Transfer> transfers = new ArrayList<>();
 
     @OneToMany(mappedBy = "aluno")
+    @JsonManagedReference
     private final List<Compra> compraList = new ArrayList<>();
 
     public Aluno(String nome, String email, String senha, Integer saldo, String cpf, String rg, String endereco, Instituicao instituicao, String curso) {

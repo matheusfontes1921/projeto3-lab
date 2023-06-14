@@ -41,14 +41,6 @@ export default function Transferencias() {
             setSaldo(res.data);
           })
           .catch((res) => console.log(res));
-        axios
-          .get(`http://localhost:8080/compras/aluno/${id}`)
-          .then((response) => {
-            setCompras(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
       } else if (tipo === "aluno") {
         const back = document.getElementById("back");
         back.style.left = "5px";
@@ -63,12 +55,24 @@ export default function Transferencias() {
 
         axios
           .get(`http://localhost:8080/alunos/saldo/${id}`, {
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" }
           })
           .then((res) => {
             setSaldo(res.data);
           })
           .catch((res) => console.log(res));
+
+        axios
+            .get(`http://localhost:8080/compras/aluno/${id}`)
+            .then((response) => {
+              console.log("res", response.data);
+              setCompras(response.data);
+            })
+            .catch((error) => {
+              console.log("error", error);
+            });
+
+
       }
     }
   }, [transferencias]);
@@ -143,6 +147,7 @@ export default function Transferencias() {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
+                <TableCell>Tipo</TableCell>
                 <TableCell>ID</TableCell>
                 <TableCell align="right">Valor</TableCell>
                 <TableCell align="right">Descrição</TableCell>
@@ -152,10 +157,11 @@ export default function Transferencias() {
               {transferencias.length !== 0 ? (
                 transferencias.map((transferencia) => (
                   <TableRow key={transferencia.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    <TableCell>transferencia</TableCell>
                     <TableCell component="th" scope="row">
                       {transferencia.id}
                     </TableCell>
-                    <TableCell align="right">{transferencia.valor}</TableCell>
+                    <TableCell style={{color: "green"}} align="right">+{transferencia.valor}</TableCell>
                     <TableCell align="right">{transferencia.descricao}</TableCell>
                   </TableRow>
                 ))
@@ -164,11 +170,16 @@ export default function Transferencias() {
               )}
               {compras.length !== 0 ? (
                 compras.map((compra) => (
-                  <TableRow key={compra.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                    <TableCell component="th" scope="row">
-                      {compra.id}
-                    </TableCell>
-                  </TableRow>
+                  compra.vantagens.map((vantagem) => (
+                    <TableRow key={vantagem.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                      <TableCell>Vantagem: {vantagem.nome}</TableCell>
+                      <TableCell component="th" scope="row">
+                        {vantagem.id}
+                      </TableCell>
+                      <TableCell style={{color: "red"}} align="right">-{vantagem.custo}</TableCell>
+                      <TableCell align="right">{vantagem.descricao}</TableCell>
+                    </TableRow>
+                  ))
                 ))
               ) : (
                 <></>

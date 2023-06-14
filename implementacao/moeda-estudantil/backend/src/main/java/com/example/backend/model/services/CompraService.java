@@ -82,9 +82,9 @@ public class CompraService {
 
     }
 
-    public ResponseEntity<List<Compra>> listarComprasDoAluno(Long idAluno) {
-        var aluno = alunoRepository.findById(idAluno).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
-        return ResponseEntity.ok(aluno.getCompraList());
+    public List<Compra> listarComprasDoAluno(Long idAluno) {
+        Aluno aluno = alunoRepository.findById(idAluno).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        return aluno.getCompraList();
     }
 
     public Compra findById(Long id) {

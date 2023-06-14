@@ -7,6 +7,8 @@ import com.example.backend.model.services.VantagemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/compras")
@@ -19,10 +21,12 @@ public class CompraController {
         this.vantagemService = vantagemService;
     }
 
-        @GetMapping("/aluno/{id})")
-        public ResponseEntity<?> listarComprasDoAluno(@PathVariable Long id) {
-            return ResponseEntity.ok(compraService.listarComprasDoAluno(id));
-        }
+    @GetMapping("/aluno/{id}")
+    public ResponseEntity<?> listarComprasDoAluno(@PathVariable Long id) {
+        List<Compra> listCompras = compraService.listarComprasDoAluno(id);
+
+        return ResponseEntity.ok(listCompras);
+    }
 
     @PostMapping("/finalizar/{id}")
     public ResponseEntity<?> finalizarCompra(@PathVariable Long id) {
